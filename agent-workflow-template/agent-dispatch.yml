@@ -1,0 +1,72 @@
+# fastverk/<module>/.github/workflows/agent-dispatch.yml
+#
+# Template — copy into any fastverk module to enable agent dispatch
+# via botnoc. Triggered when botnoc's AgentService.Dispatch adds the
+# `agent/start` label to an issue.
+#
+# Lifecycle (matches lean/Botnoc/AgentLifecycle.lean::Phase):
+#
+#   agent/start      — Dispatched   (label set by botnoc)
+#   agent/active     — Working      (set by this workflow when it starts)
+#   (label removed)  — terminal     (removed when the workflow completes)
+#   agent/cancelled  — Cancelled    (set by botnoc when AgentService.Cancel fires)
+#
+# Botnoc's AgentService.ListActive searches for issues carrying any
+# of {agent/start, agent/active} and reports them as in-flight runs.
+
+name: agent-dispatch
+
+on:
+  issues:
+    types: [labeled]
+
+# Only one in-flight run per (repo, issue). The concurrency group
+# matches AgentLifecycle's L1 (one_active_run_per_issue).
+concurrency:
+  group: agent-dispatch-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  dispatch:
+    if: github.event.label.name == 'agent/start'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # opens a branch + PR
+      issues: write         # mutates labels
+      pull-requests: write
+    steps:
+      - name: Transition agent/start → agent/active
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: agent/active
+      - name: Remove agent/start
+        uses: actions-ecosystem/action-remove-labels@v1
+        with:
+          labels: agent/start
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Backend selection. Defaults to Claude Code; switch via the
+      # `agent/<backend>` label that botnoc.dispatch attaches.
+      - name: Claude Code agent
+        if: contains(github.event.issue.labels.*.name, 'agent/claude')
+        uses: anthropics/claude-code-action@v1
+        with:
+          issue_number: ${{ github.event.issue.number }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Copilot Workspaces agent
+        if: contains(github.event.issue.labels.*.name, 'agent/copilot')
+        run: |
+          echo "Copilot Workspaces dispatch is not yet wired up."
+          echo "See fastverk/.github/AGENTS.md for the integration plan."
+          exit 1
+
+      # Always cleanup the active label, even if the agent step failed.
+      - name: Cleanup agent/active
+        if: always()
+        uses: actions-ecosystem/action-remove-labels@v1
+        with:
+          labels: agent/active
