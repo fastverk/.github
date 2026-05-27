@@ -119,11 +119,37 @@ bazel_dep(name = "rules_uv", version = "0.7.3")
 
 See each module's README for module-specific setup.
 
+## Premium tier
+
+There's a sibling registry for **private** fastverk modules —
+[`fastverk/bazel-registry-premium`](https://github.com/fastverk/bazel-registry-premium).
+Modules there target premium / NDA'd / early-iteration use cases
+(currently rules_lang, rules_lora, rules_meson; embedded-systems
+family pending). The registry repo itself is public; its
+`source.json` entries point at private GitHub tarballs that require
+auth.
+
+If you have access:
+
+```
+common --registry=https://raw.githubusercontent.com/fastverk/bazel-registry-premium/main/
+common --registry=https://raw.githubusercontent.com/fastverk/bazel-registry/main/
+common --registry=https://bcr.bazel.build/
+```
+
+Premium first so its entries win over BCR for the same module name.
+See the [premium registry's README](https://github.com/fastverk/bazel-registry-premium#auth)
+for the credential-helper or `~/.netrc` setup needed to fetch the
+private tarballs.
+
 ## Tooling
 
 - **[bazel-registry](https://github.com/fastverk/bazel-registry)** —
   the bzlmod registry itself + `rels`, the cross-repo release +
-  audit CLI.
+  audit CLI. The same `rels` CLI maintains the premium registry
+  (just pass `--registry-root` pointing at the premium checkout).
+- **[bazel-registry-premium](https://github.com/fastverk/bazel-registry-premium)** —
+  private-module registry (described above).
 - **botnoc** — bot-driven Network Operations Center: gRPC services
   + Lean specs + a meridian-rendered TUI for orchestrating work
   across the constellation. The tool that renders the table above
