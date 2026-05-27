@@ -123,11 +123,16 @@ See each module's README for module-specific setup.
 
 There's a sibling registry for **private** fastverk modules —
 [`fastverk/bazel-registry-premium`](https://github.com/fastverk/bazel-registry-premium).
-Modules there target premium / NDA'd / early-iteration use cases
-(currently rules_lang, rules_lora, rules_meson; embedded-systems
-family pending). The registry repo itself is public; its
-`source.json` entries point at private GitHub tarballs that require
-auth.
+Modules there target premium / NDA'd / early-iteration use cases.
+Current families:
+
+- **Polyglot translation + ML training** — `rules_lang`, `rules_lora`, `rules_meson`
+- **UI + rendering (proto-driven + WGSL)** — `meridian`, `pinax`, `rules_naga`, `wgsl_stdlib`, `rules_render`, `rules_walkthrough`
+- **Embedded systems** — `rules_sel4`, `rules_microkit`, `rules_microkit_tool`, `rules_cc_cross`, `rules_qemu`
+- **Hardware design (HDL / EDA)** — `rules_chisel`, `rules_verilog`, `rules_kicad`, `rules_riscv_core`, `rules_board`
+
+The registry repo itself is public; its `source.json` entries point
+at private GitHub tarballs that require auth.
 
 If you have access:
 
