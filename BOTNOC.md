@@ -125,8 +125,7 @@ the row moves to Agents with live status.
 
 Every repo gets a `.devcontainer/devcontainer.json` so a Codespace
 starts with bazel + bazelisk + buildifier + the relevant SDK
-pre-installed. For premium modules, the Codespace's secrets
-include the registry PAT for `.netrc`.
+pre-installed.
 
 Why Codespaces matter:
 
@@ -258,10 +257,9 @@ affected repo.
    abstract over claude / copilot / codex backends, or pick one?
    First answer: claude as default, claude-only in phase 5;
    pluggable backends in phase 6+.
-2. **Premium-tier integration.** When premium modules ship, the
-   noc dashboard needs to gate visibility on tier (some viewers
-   shouldn't see premium-module activity). Filter at API time
-   based on user's GitHub token scopes.
+2. **Multi-org visibility.** When activity spans fastverk +
+  citizen-sh, the noc dashboard should allow per-org filtering
+  and clear ownership scoping in views.
 3. **State persistence.** Today everything's polled from GitHub
    on demand. If we want history (e.g. "agent dispatch frequency
    over time"), introduce a small SQLite layer next to the
