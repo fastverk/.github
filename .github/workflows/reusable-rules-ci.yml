@@ -1,0 +1,53 @@
+name: reusable-rules-ci
+
+on:
+  workflow_call:
+    inputs:
+      test-command:
+        description: Bazel test command to run in the matrix job.
+        required: false
+        type: string
+        default: bazel test //... --test_output=errors
+      buildifier-command:
+        description: Buildifier command for the lint job.
+        required: false
+        type: string
+        default: buildifier --mode=check --lint=warn -r .
+      macos-enabled:
+        description: Whether to include the macOS runner in the test matrix.
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: bazel test //...
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    if: ${{ inputs.macos-enabled || matrix.os != 'macos-latest' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: bazel-contrib/setup-bazel@0.10.0
+        with:
+          bazelisk-cache: true
+          disk-cache: ${{ github.workflow }}-${{ matrix.os }}
+          repository-cache: true
+      - run: ${{ inputs.test-command }}
+
+  buildifier:
+    name: buildifier lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install buildifier
+        run: |
+          curl -fsSL -o /usr/local/bin/buildifier \
+            https://github.com/bazelbuild/buildtools/releases/download/v7.3.1/buildifier-linux-amd64
+          chmod +x /usr/local/bin/buildifier
+      - run: ${{ inputs.buildifier-command }}
