@@ -55,7 +55,7 @@ flowchart LR
     Web --> rules_nextjs[rules_nextjs]
     Web --> rules_storybook[rules_storybook]
     Web --> rules_vite[rules_vite]
-    Web --> rules_docker_compose[rules_docker_compose]
+    Web --> rules_docker[rules_docker]
 
     Devops --> rules_github[rules_github]
     Devops --> rules_gitlab[rules_gitlab]
@@ -79,48 +79,43 @@ flowchart LR
 <!-- BOTNOC:MODULES_TABLE -->
 | Module | Latest | Description |
 |---|---|---|
-| [`decomposer`](https://github.com/fastverk/decomposer) | 0.0.1 | LLM-driven NL→atomic-claims decomposition toolkit; consumed by agora corpus pipeline |
-| [`meridian`](https://github.com/mattmarshall/meridian) | 0.2.0 | Lightweight web component runtime: typed worker controller, DOM patch helpers, template loader, UI kit CSS, and Bazel rules for declarative component graphs. |
-| [`pinax`](https://github.com/mattmarshall/pinax) | 0.1.0 | Document-to-structure extraction. Apache Beam pipeline (PDF today; DOCX next) emitting typed DocumentPart records — paragraphs, headings, tables, embedded images. |
-| [`polyglot_ast`](https://github.com/fastverk/polyglot) | 0.0.10 | Gauge-theoretic IR for multi-language code translation + corpus. Extracted from rules_lang. |
-| [`rules_autoconf`](https://github.com/fastverk/rules_autoconf) | 0.1.0 | Bazel-native autoconf-style configuration. cc_check_{header,function,symbol} + config_header — replaces autoconf+m4 with a graph of cache-aware Bazel actions. |
-| [`rules_aws_workflows`](https://github.com/fastverk/rules_aws_workflows) | 0.1.1 | AWS workflow tools — hermetic Rust binaries + their Bazel rules. v0.1 ships cfn_console: interactive CloudFormation deploys via meridian PromptPanel + aws-sdk. |
-| [`rules_beam`](https://github.com/fastverk/rules_beam) | 0.0.2 | Bazel-idiomatic Apache Beam pipeline packaging + cross-runner deployment (DirectRunner, Dataflow, Flink, Spark) |
-| [`rules_bibtex`](https://github.com/fastverk/rules_bibtex) | 0.0.6 | Bazel-idiomatic BibTeX citations (arxiv/DOI/manual) + cite-lint + research-graph aspect |
-| [`rules_bun`](https://github.com/fastverk/rules_bun) | 0.2.0 | Bazel rules for Bun. Hermetic 'bun test' + sandbox-escaping 'bun run' against prebuilt binaries from oven-sh/bun releases. |
-| [`rules_cc_cross`](https://github.com/fastverk/rules_cc_cross) | 0.1.0 | Hermetic ARM/RISC-V/x86 cross-compiler toolchains for embedded Bazel builds (seL4, microkit, bare-metal). |
-| [`rules_chrome`](https://github.com/fastverk/rules_chrome) | 0.1.0 | Bazel rules for Chrome for Testing. Hermetic, sha256-pinned chrome + chromedriver per platform; launchers + opt-in Playwright (py + js) macros with Bazel-managed user-data-dirs. |
-| [`rules_ci_ir`](https://github.com/fastverk/rules_ci_ir) | 0.0.1 | Bazel rules + Rust translator + Lean 4 IR for provably correct translations between GitLab CI, GitHub Actions, and Bazel rules. |
-| [`rules_cloudformation`](https://github.com/fastverk/rules_cloudformation) | 0.7.0 | Bazel rules for AWS CloudFormation templates — schema-derived typed Bazel rules via rules_jsonschema, Java-based linter via rules_java + the official cloudformation-template-schema. |
-| [`rules_docker_compose`](https://github.com/fastverk/rules_docker_compose) | 0.2.6 | — |
-| [`rules_github`](https://github.com/fastverk/rules_github) | 0.1.2 | Bazel repository rules for GitHub-release-based content. Common substrate for rules_mdbook, rules_bun, rules_postgres, et al. |
-| [`rules_gitlab`](https://github.com/fastverk/rules_gitlab) | 0.1.3 | Bazel rules for GitLab CI: schema-pinned validate + glab-backed server-side lint. |
-| [`rules_huggingface`](https://github.com/fastverk/rules_huggingface) | 0.0.3 | Bazel-idiomatic HuggingFace toolchain: hf_model / hf_upload / hf_inference_endpoint |
-| [`rules_jena`](https://github.com/fastverk/rules_jena) | 0.3.1 | Apache Jena toolchain implementations for rules_rdf — SPARQL engine (ARQ), SHACL validator, Turtle/N-Triples serializers, OWL reasoner. Java tools built via rules_java + Maven. |
-| [`rules_jsonschema`](https://github.com/fastverk/rules_jsonschema) | 0.3.0 | Bazel rules turning JSON Schema into typed code via a per-language plugin contract (Rust, Go, Starlark) |
-| [`rules_lang`](https://github.com/fastverk/polyglot) | 0.0.13 | Gauge-theoretic IR for multi-language code translation + corpus. Extracted from rules_lang. |
-| [`rules_lean`](https://github.com/fastverk/rules_lean) | 0.3.9 | Bazel rules for Lean 4 with Lake integration (rules_lean). Reuses Lake's mathlib cache via lake_workspace repository rule. |
-| [`rules_lora`](https://github.com/fastverk/rules_lora) | 0.0.35 | Bazel-native LoRA fine-tuning |
-| [`rules_mdbook`](https://github.com/fastverk/rules_mdbook) | 0.3.1 | Bazel rules for mdbook with mdbook-mermaid plugin support. Hermetic, sha256-pinned binaries; mdbook_book rule produces a packaged HTML tarball. |
-| [`rules_meson`](https://github.com/fastverk/rules_meson) | 0.0.0 | Hermetic meson + ninja for Bazel (private) |
-| [`rules_naga`](https://github.com/fastverk/rules_naga) | 0.6.1 | Bazel-native WGSL validation, composition, and JS-module emission. Wraps naga (Mozilla's WGSL compiler) as a rust_binary driver. |
-| [`rules_nextjs`](https://github.com/fastverk/rules_nextjs) | 0.1.1 | Bazel rules for Next.js. Hermetic 'next build' with .next/ as a declared output directory. |
-| [`rules_openapi`](https://github.com/fastverk/rules_openapi) | 0.2.1 | Bazel rules turning OpenAPI 3 specs into typed code (Rust client via progenitor for v0.1), layered on rules_jsonschema's plugin contract |
-| [`rules_postgres`](https://github.com/fastverk/rules_postgres) | 0.4.1 | Bazel rules for PostgreSQL tooling: libpg_query + raw PG source. Hermetic, sha256-pinned. Includes pg_parse_valid_test for SQL-emit CI gates. |
-| [`rules_puml`](https://github.com/fastverk/rules_puml) | 0.0.2 | Bazel-idiomatic PlantUML diagram rendering + composition (Java toolchain; SVG/PNG today, PDF + typed-AST planned) |
-| [`rules_rdf`](https://github.com/fastverk/rules_rdf) | 0.3.0 | Bazel rules for RDF — toolchain types for SPARQL, SHACL validation, format conversion, and reasoning. Concrete implementations live in sibling repos like rules_jena. |
-| [`rules_render`](https://github.com/fastverk/rules_render) | 0.3.0 | Bazel-native WGSL rendering framework. Typed providers + rules for materials, surfaces, scenes, passes, pipelines, and apps — layered on rules_naga + wgsl_stdlib. |
-| [`rules_runpod`](https://github.com/fastverk/rules_runpod) | 0.0.10 | Bazel-native RunPod GPU pod orchestration. Rust CLI + TUI + typed Starlark macros (runpod_manifest / runpod_job / runpod_pod). Lifted from prime-transformer/tools/runpod-cli. |
-| [`rules_schema_org`](https://github.com/fastverk/rules_schema_org) | 0.0.1 | Sha-pinned schema.org vocabulary + grounding tables via rules_rdf / rules_jena |
-| [`rules_spec`](https://github.com/fastverk/rules_spec) | 0.5.1 | — |
-| [`rules_ssh_tui`](https://github.com/fastverk/rules_ssh_tui) | 0.0.4 | SSH-fronted TUI launcher: russh server + login-shell oci_image |
-| [`rules_storybook`](https://github.com/fastverk/rules_storybook) | 0.1.0 | Bazel rules for Storybook: hermetic build, deterministic story manifest, sandbox-escaping dev runner. |
-| [`rules_tectonic`](https://github.com/fastverk/rules_tectonic) | 0.2.0 | Bazel rules to compile LaTeX into PDFs via tectonic. |
-| [`rules_uv`](https://github.com/fastverk/rules_uv) | 0.7.3 | Bazel rules for uv (Astral's Python package manager) |
-| [`rules_vite`](https://github.com/fastverk/rules_vite) | 0.1.0 | Bazel rules for Vitest under aspect_rules_js. Hermetic js_test wrapper for vitest. |
-| [`rules_walkthrough`](https://github.com/fastverk/rules_walkthrough) | 0.1.0 | Bazel rules for declarative slide-deck rendering — walkthrough.v1.Walkthrough JSON → self-contained static site (renderer JS + KaTeX + marked + per-deck data sidecars). |
-| [`rules_web`](https://github.com/fastverk/rules_web) | 0.0.1 | Bazel toolchain types and rules for W3C/WHATWG web-standards specs (webidl/html/css/js) — decoupled from impl modules. |
-| [`wgsl_stdlib`](https://github.com/fastverk/wgsl_stdlib) | 0.4.0 | Reusable WebGPU shader snippets (colormap, complex math, ζ-function, lighting, mesh, contour/grid) validated via rules_naga. |
+| [`rules_agentic_ide`](https://github.com/fastverk/rules_agentic_ide) | 0.0.3 | `fastverk/rules_agentic_ide` |
+| [`rules_autoconf`](https://github.com/fastverk/rules_autoconf) | 0.1.0 | `fastverk/rules_autoconf` |
+| [`rules_beam`](https://github.com/fastverk/rules_beam) | 0.0.2 | `fastverk/rules_beam` |
+| [`rules_bibtex`](https://github.com/fastverk/rules_bibtex) | 0.0.6 | `fastverk/rules_bibtex` |
+| [`rules_bun`](https://github.com/fastverk/rules_bun) | 0.2.0 | `fastverk/rules_bun` |
+| [`rules_cc_cross`](https://github.com/fastverk/rules_cc_cross) | 0.1.0 | `fastverk/rules_cc_cross` |
+| [`rules_chrome`](https://github.com/fastverk/rules_chrome) | 0.1.0 | `fastverk/rules_chrome` |
+| [`rules_ci_ir`](https://github.com/fastverk/rules_ci_ir) | 0.0.1 | `fastverk/rules_ci_ir` |
+| [`rules_cloudformation`](https://github.com/fastverk/rules_cloudformation) | 0.7.0 | `fastverk/rules_cloudformation` |
+| [`rules_docker`](https://github.com/fastverk/rules_docker_compose) | 0.2.6 | `fastverk/rules_docker_compose` |
+| [`rules_github`](https://github.com/fastverk/rules_github) | 0.1.2 | `fastverk/rules_github` |
+| [`rules_gitlab`](https://github.com/fastverk/rules_gitlab) | 0.1.3 | `fastverk/rules_gitlab` |
+| [`rules_huggingface`](https://github.com/fastverk/rules_huggingface) | 0.0.3 | `fastverk/rules_huggingface` |
+| [`rules_jena`](https://github.com/fastverk/rules_jena) | 0.3.2 | `fastverk/rules_jena` |
+| [`rules_jsonschema`](https://github.com/fastverk/rules_jsonschema) | 0.3.0 | `fastverk/rules_jsonschema` |
+| [`rules_lang`](https://github.com/fastverk/polyglot) | 0.0.13 | `fastverk/polyglot` |
+| [`rules_lean`](https://github.com/fastverk/rules_lean) | 0.3.9 | `fastverk/rules_lean` |
+| [`rules_lora`](https://github.com/fastverk/rules_lora) | 0.0.35 | `fastverk/rules_lora` |
+| [`rules_mdbook`](https://github.com/fastverk/rules_mdbook) | 0.3.1 | `fastverk/rules_mdbook` |
+| [`rules_meridian`](https://github.com/mattmarshall/meridian) | 0.2.1 | `mattmarshall/meridian` |
+| [`rules_meson`](https://github.com/fastverk/rules_meson) | 0.0.0 | `fastverk/rules_meson` |
+| [`rules_nextjs`](https://github.com/fastverk/rules_nextjs) | 0.2.0 | `fastverk/rules_nextjs` |
+| [`rules_openapi`](https://github.com/fastverk/rules_openapi) | 0.2.1 | `fastverk/rules_openapi` |
+| [`rules_polyglot`](https://github.com/fastverk/polyglot) | 0.0.10 | `fastverk/polyglot` |
+| [`rules_postgres`](https://github.com/fastverk/rules_postgres) | 0.4.1 | `fastverk/rules_postgres` |
+| [`rules_puml`](https://github.com/fastverk/rules_puml) | 0.0.2 | `fastverk/rules_puml` |
+| [`rules_rdf`](https://github.com/fastverk/rules_rdf) | 0.3.0 | `fastverk/rules_rdf` |
+| [`rules_runpod`](https://github.com/fastverk/rules_runpod) | 0.0.10 | `fastverk/rules_runpod` |
+| [`rules_schema_org`](https://github.com/fastverk/rules_schema_org) | 0.0.1 | `fastverk/rules_schema_org` |
+| [`rules_spec`](https://github.com/fastverk/rules_spec) | 0.5.1 | `fastverk/rules_spec` |
+| [`rules_ssh_tui`](https://github.com/fastverk/rules_ssh_tui) | 0.0.5 | `fastverk/rules_ssh_tui` |
+| [`rules_storybook`](https://github.com/fastverk/rules_storybook) | 0.1.0 | `fastverk/rules_storybook` |
+| [`rules_tectonic`](https://github.com/fastverk/rules_tectonic) | 0.2.0 | `fastverk/rules_tectonic` |
+| [`rules_uv`](https://github.com/fastverk/rules_uv) | 0.7.4 | `fastverk/rules_uv` |
+| [`rules_vite`](https://github.com/fastverk/rules_vite) | 0.1.0 | `fastverk/rules_vite` |
+| [`rules_walkthrough`](https://github.com/fastverk/rules_walkthrough) | 0.1.0 | `fastverk/rules_walkthrough` |
+| [`rules_web`](https://github.com/fastverk/rules_web) | 0.0.1 | `fastverk/rules_web` |
 <!-- /BOTNOC:MODULES_TABLE -->
 
 ## Quick start
