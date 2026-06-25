@@ -23,13 +23,30 @@
   show up as raw text on GitHub and confuse botnoc-readme.
 -->
 
-# fastverk
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="lockup_dark.png">
+  <img alt="fastverk — proven systems, built fast" src="lockup_light.png" width="540">
+</picture>
 
-A constellation of Bazel `rules_*` modules sharing a single bzlmod
-registry. Each module is one concern; compose them to get a
-hermetic, reproducible build for whatever stack you're shipping.
+### proven systems, built fast — the hermetic software works
 
-## What's in the registry
+A vertically-integrated, Bazel-native platform for complex, multi-modal
+software, and the `rules_*` constellation it's built on — every module one
+concern, composed into hermetic, reproducible builds.
+
+## The platform
+
+| | |
+|---|---|
+| [**fvkit**](https://github.com/fastverk/fvkit) | core/runtime — the platform library + the `fvd` daemon (volumes, bazelrc, connections, maintenance, updater) |
+| [**fastverk-app**](https://github.com/fastverk/fastverk-app) | the macOS desktop app — a menu-bar control plane for the works |
+| [**brand**](https://github.com/fastverk/brand) | the visual identity — one parametric source for the mark, icons, brandbook, and decks |
+
+Managed cloud RBE + cache, a WireGuard mesh, and source hosting compose on
+top: the build, the network, the source, and the machine — reproducible and
+verified, end to end.
+
+## The constellation — the `rules_*` registry
 
 ```mermaid
 flowchart LR
