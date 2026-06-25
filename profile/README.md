@@ -24,8 +24,8 @@
 -->
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="lockup_dark.png">
-  <img alt="fastverk — proven systems, built fast" src="lockup_light.png" width="540">
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/fastverk/brand/releases/download/v0.2.0/fastverk-lockup-dark.png">
+  <img alt="fastverk — proven systems, built fast" src="https://github.com/fastverk/brand/releases/download/v0.2.0/fastverk-lockup-light.png" width="540">
 </picture>
 
 ### proven systems, built fast — the hermetic software works
