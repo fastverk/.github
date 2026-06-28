@@ -140,7 +140,7 @@ flowchart LR
 `.bazelrc`:
 
 ```
-common --registry=https://raw.githubusercontent.com/fastverk/bazel-registry/main/
+common --registry=https://registry.fastverk.com/
 common --registry=https://bcr.bazel.build/
 ```
 
@@ -157,7 +157,7 @@ See each module's README for module-specific setup.
 
 fastverk and citizen-sh now publish from separate registries.
 
-- fastverk modules: `https://raw.githubusercontent.com/fastverk/bazel-registry/main/`
+- fastverk modules: `https://registry.fastverk.com/`
 - citizen-sh modules: `https://raw.githubusercontent.com/citizen-sh/bazel-registry/main/`
 
 Use the registry chain that matches the modules you consume.
